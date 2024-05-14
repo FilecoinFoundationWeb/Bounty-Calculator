@@ -557,7 +557,7 @@ Overall Risk Severity: <span id="R"></span>
     var getSevText = e.options[e.selectedIndex].text;
     switch(getSevText) {
         case "Critical":
-            calcAmount(likelihoodValue,impactValue,100000,500000);
+            calcAmount(likelihoodValue,impactValue,100000,150000);
             break;
         case "High":
             calcAmount(likelihoodValue,impactValue,25000,100000);
@@ -566,7 +566,7 @@ Overall Risk Severity: <span id="R"></span>
             calcAmount(likelihoodValue,impactValue,10000,25000);
             break;
         case "Low":
-            calcAmount(likelihoodValue,impactValue,5000,10000);
+            calcAmount(likelihoodValue,impactValue,1000,10000);
             break;
     }
 }
