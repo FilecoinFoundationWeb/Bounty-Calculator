@@ -602,13 +602,13 @@ BI/PV: 0-3-5-7-9
                 var getSevText = e.options[e.selectedIndex].text;
                 switch (getSevText) {
                     case "Critical":
-                        calcAmount(likelihoodValue, impactValue, 100000, 150000);
+                        calcAmount(likelihoodValue, impactValue, 25000, 50000);
                         break;
                     case "High":
-                        calcAmount(likelihoodValue, impactValue, 10000, 100000);
+                        calcAmount(likelihoodValue, impactValue, 7500, 25000);
                         break;
                     case "Medium":
-                        calcAmount(likelihoodValue, impactValue, 2000, 10000);
+                        calcAmount(likelihoodValue, impactValue, 2000, 7500);
                         break;
                     case "Low":
                         calcAmount(likelihoodValue, impactValue, 1000, 2000);
