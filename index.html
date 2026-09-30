@@ -156,6 +156,22 @@
                 $('#' + sFactor).text(getRisk(factor) + ' (' + sFactor + ': ' + factor + ')');
 
             }
+            // A value of 0 is labelled "N/A" on every selector except Opportunity,
+            // where 0 is a real score ("Full access or expensive resources required").
+            // Averaging N/A in as a zero penalises findings for factors that simply do
+            // not apply, so only scored factors count toward a group's average.
+            function avgScored(ids, alwaysCount) {
+                alwaysCount = alwaysCount || [];
+                var sum = 0, n = 0;
+                ids.forEach(function (id) {
+                    var v = +$("#" + id).val();
+                    if (v !== 0 || alwaysCount.indexOf(id) !== -1) {
+                        sum += v;
+                        n++;
+                    }
+                });
+                return n === 0 ? 0 : sum / n;
+            }
             function calculate() {
                 var TAF, VF, TIF, BIF, LF, IF, R, mLF, mIF = 0;
                 var score = '';
@@ -163,10 +179,10 @@
                 matrix[0] = [];
                 matrix[1] = [];
                 matrix[2] = [];
-                TAF = (+$("#sl").val() + +$("#m").val() + +$("#o").val() + +$("#s").val()) / 4;
-                VF = (+$("#ed").val() + +$("#ee").val() + +$("#a").val() + +$("#id").val()) / 4;
-                TIF = (+$("#lc").val() + +$("#li").val() + +$("#lav").val() + +$("#lac").val()) / 4;
-                BIF = (+$("#fd").val() + +$("#rd").val() + +$("#nc").val() + +$("#pv").val()) / 4;
+                TAF = avgScored(["sl", "m", "o", "s"], ["o"]);
+                VF = avgScored(["ed", "ee", "a", "id"]);
+                TIF = avgScored(["lc", "li", "lav", "lac"]);
+                BIF = avgScored(["fd", "rd", "nc", "pv"]);
                 score = '(';
                 score = score + 'SL:' + $("#sl").val() + '/';
                 score = score + 'M:' + $("#m").val() + '/';
